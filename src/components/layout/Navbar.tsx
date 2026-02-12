@@ -1,10 +1,10 @@
-"use client";
 import Link from "next/link";
 import {cn} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
 import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
 import {MenuIcon, XIcon, Heart, ShoppingCart} from "lucide-react";
 import {FaHeart, FaShoppingCart} from "react-icons/fa";
+import { FaUser } from "react-icons/fa6";
 import Image from "next/image";
 
 const navItems = [
@@ -19,7 +19,7 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-10 z-50 backdrop-blur-md text-white transition-colors duration-300",
+        "sticky top-4 z-50 backdrop-blur-md text-white transition-colors duration-300",
         "w-[80%] mx-auto rounded-full mt-3",
         "border border-red-500/20 shadow-[0_4px_30px_rgba(255,0,0,0.1)]",
       )}>
@@ -27,12 +27,10 @@ export default function Navbar() {
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center justify-between w-full gap-6">
           {/* Logo */}
-          <div className="flex items-center gap-2">
-            <Link href="/">
+            <Link href="/" className="flex items-center gap-2">
               <Image src="/logo.webp" alt="Logo" width={40} height={40} />
+              <span className="text-2xl font-bold tracking-tight">MOODIST.eg</span>
             </Link>
-            <span className="text-2xl font-bold tracking-tight">Moodist</span>
-          </div>
           <div className="flex justify-between w-[40%]">
             {navItems.map((item) => (
               <Link
@@ -59,6 +57,9 @@ export default function Navbar() {
             <div className="cursor-pointer group">
               <FaShoppingCart className="w-5 h-5 group-hover:scale-115 group-hover:text-primary-500 transition-all duration-300" />
             </div>
+            <Link href="/login" className="cursor-pointer group">
+              <FaUser className="w-5 h-5 group-hover:scale-115 group-hover:text-primary-500 transition-all duration-300" />
+            </Link>
           </div>
         </nav>
 
@@ -70,6 +71,11 @@ export default function Navbar() {
           </Button>
           <Button variant="ghost" className="p-2 text-white">
             <ShoppingCart className="w-5 h-5" />
+          </Button>
+          <Button asChild variant="ghost" className="p-2 text-white">
+            <Link href="/login">
+              <FaUser className="w-5 h-5" />
+            </Link>
           </Button>
 
           <Sheet>
