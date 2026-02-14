@@ -10,7 +10,7 @@
 --color-primary-200: #ffb3b3;
 --color-primary-300: #ff8080;
 --color-primary-400: #ff4d4d;
---color-primary-500: #e10000; /* الأساسي */
+--color-primary-500: #e10000; /* main */
 --color-primary-600: #b80000;
 --color-primary-700: #8f0000;
 --color-primary-800: #660000;
@@ -38,6 +38,32 @@
 --color-white-800: #c9c9c9;
 --color-white-900: #bfbfbf;
 }
+
+/* ===== Scrollbar - Chrome, Edge, Safari ===== */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3d0000, #0d0d0d);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #3d0000, #0d0d0d);
+}
+
+/* ===== Firefox ===== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3d0000 #0d0d0d;
+}
+
 
 @theme inline {
   --color-background: var(--background);

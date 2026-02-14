@@ -1,9 +1,11 @@
+"use client";
 import Link from "next/link";
-import {cn} from "@/lib/utils";
-import {Button} from "@/components/ui/button";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {Sheet, SheetContent, SheetTrigger} from "@/components/ui/sheet";
-import {MenuIcon, XIcon, Heart, ShoppingCart} from "lucide-react";
-import {FaHeart, FaShoppingCart} from "react-icons/fa";
+import { MenuIcon, XIcon, Heart, ShoppingCart } from "lucide-react";
+import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
 import Image from "next/image";
 
@@ -16,37 +18,49 @@ const navItems = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname(); // هنا نجيب الصفحة الحالية
+
   return (
     <header
       className={cn(
         "sticky top-4 z-50 backdrop-blur-md text-white transition-colors duration-300",
         "w-[80%] mx-auto rounded-full mt-3",
-        "border border-red-500/20 shadow-[0_4px_30px_rgba(255,0,0,0.1)]",
+        "border border-red-500/20 shadow-[0_4px_30px_rgba(255,0,0,0.1)]"
       )}>
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center justify-between w-full gap-6">
           {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
-              <Image src="/logo.webp" alt="Logo" width={40} height={40} />
-              <span className="text-2xl font-bold tracking-tight">MOODIST.eg</span>
-            </Link>
+          <Link href="/" className="flex items-center gap-2">
+            <Image src="/logo.webp" alt="Logo" width={40} height={40} />
+            <span className="text-2xl font-bold tracking-tight">MOODIST.eg</span>
+          </Link>
           <div className="flex justify-between w-[40%]">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="relative group text-lg font-semibold text-white transition-colors duration-200 hover:text-primary-500">
-                {item.title}
-                <span
-                  className="absolute left-0 -bottom-1 h-0.5 w-0 transition-all duration-500 
-                  group-hover:w-full group-hover:animate-underlineLoop rounded-full"
-                  style={{
-                    background:
-                      "linear-gradient(to right, rgba(255,0,0,0.1) 10%, rgba(255,0,0,0.7) 100%)",
-                  }}></span>
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const isActive = pathname === item.href; 
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "relative group text-lg font-semibold transition-colors duration-200",
+                    isActive ? "text-primary-500" : "text-white",
+                    "hover:text-primary-500"
+                  )}>
+                  {item.title}
+                  <span
+                    className={cn(
+                      "absolute left-0 -bottom-1 h-0.5 w-0 transition-all duration-500 rounded-full",
+                      "group-hover:w-full group-hover:animate-underlineLoop",
+                      isActive && "w-full",
+                    )}
+                    style={{
+                      background:
+                        "linear-gradient(to right, rgba(255,0,0,0.1) 10%, rgba(255,0,0,0.7) 100%)",
+                    }}></span>
+                </Link>
+              );
+            })}
           </div>
 
           {/* Right Icons */}
@@ -94,14 +108,21 @@ export default function Navbar() {
                 </SheetTrigger>
               </div>
               <nav className="flex flex-col space-y-4">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="text-lg hover:text-indigo-400 transition-colors duration-200">
-                    {item.title}
-                  </Link>
-                ))}
+                {navItems.map((item) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={cn(
+                        "text-lg transition-colors duration-200",
+                        isActive ? "text-primary-500" : "text-white",
+                        "hover:text-primary-500"
+                      )}>
+                      {item.title}
+                    </Link>
+                  );
+                })}
               </nav>
             </SheetContent>
           </Sheet>
