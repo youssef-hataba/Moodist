@@ -92,11 +92,10 @@ export default function Hero() {
         {/* Right Side: Video with Stylized Frame */}
         <motion.div className="lg:col-span-5 relative h-[50vh] lg:h-[80vh] w-full">
           {/* Decorative Frame Elements */}
-          <div className="absolute -inset-4 border border-white/5 rounded-[3rem] z-0" />
-          <div className="absolute -inset-8 border border-white/5 rounded-[4rem] z-0 opacity-50" />
-          <div className="absolute -inset-8 border border-white/5 rounded-[4rem] z-0 opacity-50" />
+          <div className="absolute -inset-4 border border-white/8 rounded-[3rem] z-0" />
+          <div className="absolute -inset-8 border border-white/5 rounded-[4rem] z-0" />
 
-          <div className="relative h-full w-full rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl shadow-primary-900/20">
+          <div className="relative h-full w-full rounded-[2.5rem] overflow-hidden border border-white/12 shadow-2xl shadow-primary-900/20">
             <video
               autoPlay
               muted

@@ -3,7 +3,13 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
 
-const features = [
+type Feature = {
+  title: string;
+  desc: string;
+  icon: string;
+};
+
+const features: Feature[] = [
   {
     title: "Vivid Precision",
     desc: "High-definition prints that capture every detail of your vision with sharp, vibrant colors.",
@@ -26,22 +32,22 @@ const features = [
   },
 ];
 
-const FeatureCard = ({ f, i }: { f: any; i: number }) => {
+const FeatureCard = ({ f, i }: { f: Feature; i: number }) => {
   return (
     <motion.div
-      // أنميشن الدخول: بيطلع من تحت مع Scale خفيف
+      // Entry animation: fades in from bottom with subtle scale
       initial={{ opacity: 0, y: 50, scale: 0.9 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ 
         duration: 0.8, 
-        delay: i * 0.15, // تتابع احترافي
-        ease: [0.16, 1, 0.3, 1] // Custom Cubic Bezier لحركة ناعمة جداً
+        delay: i * 0.15, // Professional stagger effect
+        ease: [0.16, 1, 0.3, 1] // Custom cubic bezier for ultra smooth motion
       }}
       viewport={{ once: true }}
       whileHover={{ y: -12, transition: { duration: 0.4 } }}
-      className="group relative p-10 rounded-[2.5rem] bg-[#0A0A0A] border border-white/[0.05] hover:border-primary-500/40 transition-colors duration-500 overflow-hidden"
+      className="group relative p-10 rounded-[2.5rem] bg-white/2 border border-white/[0.15] hover:border-primary-500/40 transition-colors duration-500 overflow-hidden"
     >
-      {/* أنميشن الرقم الخلفي: بيتحرك مع الـ Hover */}
+      {/* Background index number animation reacts on hover */}
       <motion.span 
         initial={{ x: 20, opacity: 0 }}
         whileInView={{ x: 0, opacity: 0.03 }}
@@ -53,11 +59,11 @@ const FeatureCard = ({ f, i }: { f: any; i: number }) => {
 
       <div className="relative z-10">
         <motion.div 
-          whileHover={{ rotate: [0, -10, 10, 0] }} // رشة أنميشن للأيقونة عند التحويم
+          whileHover={{ rotate: [0, -10, 10, 0] }} // Subtle icon animation on hover
           transition={{ duration: 0.5 }}
           className="mb-12 inline-block relative"
         >
-            {/* توهج خلف الأيقونة */}
+            {/* Glow effect behind the icon */}
             <div className="absolute inset-0 bg-primary-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="relative w-16 h-16 flex items-center justify-center rounded-2xl bg-white/[0.03] border border-white/10 group-hover:border-primary-500/30 transition-all">
                 <Image src={f.icon} alt={f.title} width={35} height={35} className="object-contain filter brightness-110 group-hover:brightness-150 transition-all" />
@@ -73,7 +79,7 @@ const FeatureCard = ({ f, i }: { f: any; i: number }) => {
         </p>
       </div>
       
-      {/* لمعة (Shine) بتعدي على الكارت عند التحويم */}
+      {/* Shine effect sweeps across the card on hover */}
       <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent pointer-events-none" />
     </motion.div>
   );
@@ -86,13 +92,13 @@ export default function StoryFeatures() {
     offset: ["start end", "end start"],
   });
 
-  // تأثير بارالاكس خفيف للنص الخلفي
+  // Subtle parallax effect for background text
   const yText = useTransform(scrollYProgress, [0, 1], [0, -200]);
 
   return (
     <section ref={containerRef} className="relative py-40 bg-[#050505] overflow-hidden px-6 lg:px-20">
       
-      {/* Background Text with Parallax */}
+      {/* Background text with parallax motion */}
       <motion.div style={{ y: yText }} className="absolute top-20 left-1/2 -translate-x-1/2 w-full text-center opacity-[0.02] pointer-events-none select-none">
         <h1 className="text-[30vw] font-black tracking-tighter leading-none text-white">
           LEGACY
@@ -101,7 +107,7 @@ export default function StoryFeatures() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-32">
-          {/* أنميشن الـ Badge: بيفتح زي الـ Scanner */}
+          {/* Badge animation reveals like a scanner line */}
           <motion.div
             initial={{ width: 0, opacity: 0 }}
             whileInView={{ width: "fit-content", opacity: 1 }}
