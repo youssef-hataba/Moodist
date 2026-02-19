@@ -6,7 +6,7 @@ import SpinnerHoodies from "./SpinnerHoodies";
 
 const texts = [
   {id: 1, content: "Design Your Hoodie"},
-  {id: 2, content: "Choose Your Style"},
+  // {id: 2, content: "Choose Your Style"},
 ];
 
 export default function TextReveal() {
@@ -26,7 +26,7 @@ export default function TextReveal() {
       } else {
         setIsFinished(true);
       }
-    }, 2800);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, [currentText, isInView, isFinished]);

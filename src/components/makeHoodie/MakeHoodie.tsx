@@ -1,4 +1,3 @@
-import SpinnerHoodies from "./SpinnerHoodies";
 import TextReveal from "./TextReveal";
 
 export default function MakeHoodie() {

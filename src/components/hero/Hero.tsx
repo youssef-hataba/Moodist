@@ -1,99 +1,137 @@
 "use client";
-
-import {useState, useEffect} from "react";
-import {motion} from "framer-motion";
-import { Button } from "../Button";
+import {useState, useEffect, useRef} from "react";
+import {motion, AnimatePresence, useScroll, useTransform} from "framer-motion";
+import {Button} from "../Button";
 import Image from "next/image";
 
-const texts = ["Elevate Your Style", "Discover Modern Apparel", "Customize Your Hoodie"];
+const texts = [
+  {main: "Elevate Your", highlight: "Style"},
+  {main: "Modern", highlight: "Apparel"},
+  {main: "Your Turn to", highlight: "Create"},
+];
 
 export default function Hero() {
-  const [displayedText, setDisplayedText] = useState("");
-  const [textIndex, setTextIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
+  const [index, setIndex] = useState(0);
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    // Stop if last text finished
-    if (textIndex === texts.length - 1 && charIndex === texts[textIndex].length) {
-      // Fade out after a short delay
-      const hideTimeout = setTimeout(() => setIsVisible(false), 1000);
-      return () => clearTimeout(hideTimeout);
+    if (index >= texts.length - 1) {
+      return;
     }
-
-    if (charIndex < texts[textIndex].length) {
-      const timeout = setTimeout(() => {
-        setDisplayedText((prev) => prev + texts[textIndex][charIndex]);
-        setCharIndex(charIndex + 1);
-      }, 100);
-      return () => clearTimeout(timeout);
-    } else {
-      if (textIndex < texts.length - 1) {
-        const timeout = setTimeout(() => {
-          setDisplayedText("");
-          setCharIndex(0);
-          setTextIndex(textIndex + 1);
-        }, 3000);
-        return () => clearTimeout(timeout);
-      }
-    }
-  }, [charIndex, textIndex]);
+    const timer = setInterval(() => {
+      setIndex((prev) => prev + 1);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [index]);
 
   return (
-    <section className="relative w-full flex items-center justify-end bg-black">
-      <div className="absolute top-0 right-0 z-10 flex flex-col justify-center w-full px-8 lg:pl-20 h-full">
-        <motion.h1
-          key={textIndex}
-          className="text-white text-4xl lg:text-6xl font-bold mb-10 flex items-center"
-          initial={{opacity: 1, y: 0}}
-          animate={{opacity: 1, y: 0}}>
-          {displayedText}
-          {charIndex < texts[textIndex].length && (
-            <motion.span
-              className="ml-2 inline-block w-1.5 h-full bg-primary-700 rounded-full"
-              animate={{
-                opacity: [0, 1, 0],
-              }}
-              transition={{repeat: Infinity, duration: 1}}>
-            </motion.span>
-          )}
-        </motion.h1>
+    <section ref={containerRef} className="relative w-full flex items-center bg-black py-16">
+      <div className="container mx-auto px-6 lg:px-20 relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        {/* Left Side: Content */}
+        <div className="lg:col-span-7 pt-20 lg:pt-0">
+          <motion.div
+            initial={{opacity: 0, x: -30}}
+            animate={{opacity: 1, x: 0}}
+            transition={{duration: 0.8}}>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 mb-6">
+              <span className="w-2 h-2 rounded-full bg-primary-600 animate-pulse" />
+              <span className="text-[10px] uppercase tracking-[0.3em] text-gray-400 font-bold">
+                New Collection Out Now
+              </span>
+            </div>
 
-        <motion.p
-          className="text-black-400 text-lg lg:text-xl mb-8 max-w-xl"
-          initial={{opacity: 0 , x:-50}}
-          animate={{opacity: displayedText ? 1 : 0, x: displayedText ? 0 : -50}}
-          transition={{delay: 0.5, duration: 0.5}}>
-          Discover our modern apparel collection – hoodies, tees, and more – designed for comfort,
-          style, and individuality. Personalize your look with your own custom designs.
-        </motion.p>
+            <div className="h-45 md:h-60 flex flex-col justify-center">
+              <AnimatePresence mode="wait">
+                <motion.h1
+                  key={index}
+                  initial={{y: 40, opacity: 0}}
+                  animate={{y: 0, opacity: 1}}
+                  exit={{y: -40, opacity: 0}}
+                  transition={{duration: 2, ease: [0.22, 1, 0.36, 1]}}
+                  className="text-white text-6xl md:text-8xl font-black leading-[0.9] tracking-tighter">
+                  {texts[index].main} <br />
+                  <span className="font-serif italic font-light text-primary-500 drop-shadow-[0_0_30px_rgba(139,0,0,0.8)]">
+                    {texts[index].highlight}
+                  </span>
+                </motion.h1>
+              </AnimatePresence>
+            </div>
 
-        <motion.div
-          className="flex gap-4"
-          initial={{opacity: 0, y: 10}}
-          animate={{
-            opacity: displayedText ? 1 : 0,
-            y: displayedText ? 0 : 10,
-          }}
-          transition={{delay: 1, duration: 0.5}}>
-          <Button>Shop Now</Button>
-          <Button variant="secondary" className="py-0">
-            <span>Customize Your Hoodie </span>
-            <Image alt="Swipe up Arrows" src="/icons/SwipeArrow.gif" width={40} height={40} className="rotate-90 invert mt-1" />
-          </Button>
+            <motion.p
+              initial={{opacity: 0}}
+              animate={{opacity: 1}}
+              transition={{delay: 0.4}}
+              className="text-gray-400 text-lg md:text-xl mb-10 max-w-lg font-light leading-relaxed">
+              Beyond fashion. We engineer <span className="text-white">self-expression</span>{" "}
+              through premium fabrics and artisan tailoring.
+            </motion.p>
+
+            <motion.div
+              initial={{opacity: 0, y: 20}}
+              animate={{opacity: 1, y: 0}}
+              transition={{delay: 0.6}}
+              className="flex flex-wrap gap-5">
+              <Button variant="primary">Shop Collection</Button>
+
+              <Button variant="secondary" className="group">
+                <span className="flex items-center gap-3">
+                  Customize Your Piece
+                  <Image
+                    alt="Arrow"
+                    src="/icons/SwipeArrow.gif"
+                    width={24}
+                    height={24}
+                    className="rotate-90 invert grayscale group-hover:grayscale-0 group-hover:opacity-100 opacity-40 transition-all duration-500"
+                  />
+                </span>
+              </Button>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Right Side: Video with Stylized Frame */}
+        <motion.div className="lg:col-span-5 relative h-[50vh] lg:h-[80vh] w-full">
+          {/* Decorative Frame Elements */}
+          <div className="absolute -inset-4 border border-white/5 rounded-[3rem] z-0" />
+          <div className="absolute -inset-8 border border-white/5 rounded-[4rem] z-0 opacity-50" />
+          <div className="absolute -inset-8 border border-white/5 rounded-[4rem] z-0 opacity-50" />
+
+          <div className="relative h-full w-full rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl shadow-primary-900/20">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover scale-110">
+              <source src="/hero.mp4" type="video/mp4" />
+            </video>
+
+            {/* Video Overlay Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          </div>
+
+          {/* Floating Card Detail */}
+          <motion.div
+            animate={{y: [0, -10, 0]}}
+            transition={{duration: 4, repeat: Infinity}}
+            className="absolute bottom-10 -left-10 bg-white/5 backdrop-blur-xl border border-white/10 p-4 rounded-2xl hidden md:block">
+            <p className="text-[10px] text-primary-500 font-bold uppercase tracking-widest mb-1">
+              Fabric Quality
+            </p>
+            <p className="text-white text-sm font-serif italic">100% Egyptian Cotton</p>
+          </motion.div>
         </motion.div>
       </div>
 
-      <div className="flex items-center justify-center w-full lg:w-1/2 my-auto ">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="h-full object-contain opacity-90 overflow-hidden">
-          <source src="/hero.mp4" type="video/mp4" />
-        </video>
-      </div>
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        transition={{delay: 1}}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+        <span className="text-[9px] uppercase tracking-[0.3em] text-gray-500">Explore</span>
+        <div className="w-[1px] h-12 bg-gradient-to-b from-primary-500 to-transparent" />
+      </motion.div>
     </section>
   );
 }
