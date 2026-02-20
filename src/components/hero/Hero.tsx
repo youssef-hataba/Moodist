@@ -1,6 +1,6 @@
 "use client";
 import {useState, useEffect, useRef} from "react";
-import {motion, AnimatePresence, useScroll, useTransform} from "framer-motion";
+import {motion, AnimatePresence} from "framer-motion";
 import {Button} from "../Button";
 import Image from "next/image";
 
@@ -106,7 +106,7 @@ export default function Hero() {
             </video>
 
             {/* Video Overlay Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
           </div>
 
           {/* Floating Card Detail */}
@@ -129,7 +129,7 @@ export default function Hero() {
         transition={{delay: 1}}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
         <span className="text-[9px] uppercase tracking-[0.3em] text-gray-500">Explore</span>
-        <div className="w-[1px] h-12 bg-gradient-to-b from-primary-500 to-transparent" />
+        <div className="w-px h-12 bg-linear-to-b from-primary-500 to-transparent" />
       </motion.div>
     </section>
   );
