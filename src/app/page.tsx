@@ -4,8 +4,8 @@ import StoryFeatures from "../components/Features";
 
 export default function Home() {
   return (
-    <div className="">
-      <main className="">
+    <div>
+      <main>
         <Hero />
         <MakeHoodie />
         <StoryFeatures />

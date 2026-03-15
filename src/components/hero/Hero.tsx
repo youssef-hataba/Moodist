@@ -25,8 +25,8 @@ export default function Hero() {
   }, [index]);
 
   return (
-    <section ref={containerRef} className="relative w-full flex items-center bg-black py-16">
-      <div className="container mx-auto px-6 lg:px-20 relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <section ref={containerRef} className="relative w-full flex items-center  py-16">
+      <div className="container mx-auto relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         {/* Left Side: Content */}
         <div className="lg:col-span-7 pt-20 lg:pt-0">
           <motion.div
@@ -48,7 +48,7 @@ export default function Hero() {
                   animate={{y: 0, opacity: 1}}
                   exit={{y: -40, opacity: 0}}
                   transition={{duration: 2, ease: [0.22, 1, 0.36, 1]}}
-                  className="text-white text-6xl md:text-8xl font-black leading-[0.9] tracking-tighter">
+                  className="text-white text-6xl md:text-[5.8rem] font-black leading-[0.9] tracking-tighter">
                   {texts[index].main} <br />
                   <span className="font-serif italic font-light text-primary-500 drop-shadow-[0_0_30px_rgba(139,0,0,0.8)]">
                     {texts[index].highlight}
@@ -61,7 +61,7 @@ export default function Hero() {
               initial={{opacity: 0}}
               animate={{opacity: 1}}
               transition={{delay: 0.4}}
-              className="text-gray-400 text-lg md:text-xl mb-10 max-w-lg font-light leading-relaxed">
+              className="text-gray-400 text-lg md:text-lg mb-10 max-w-lg font-light leading-relaxed">
               Beyond fashion. We engineer <span className="text-white">self-expression</span>{" "}
               through premium fabrics and artisan tailoring.
             </motion.p>
@@ -90,7 +90,7 @@ export default function Hero() {
         </div>
 
         {/* Right Side: Video with Stylized Frame */}
-        <motion.div className="lg:col-span-5 relative h-[50vh] lg:h-[80vh] w-full">
+        <motion.div className="lg:col-span-5 relative h-[50vh] lg:h-[70vh] w-full">
           {/* Decorative Frame Elements */}
           <div className="absolute -inset-4 border border-white/8 rounded-[3rem] z-0" />
           <div className="absolute -inset-8 border border-white/5 rounded-[4rem] z-0" />

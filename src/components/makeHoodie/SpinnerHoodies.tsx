@@ -1,7 +1,7 @@
 "use client";
 
-import {useState, useEffect} from "react";
-import {motion, useAnimationControls, AnimatePresence} from "framer-motion";
+import {useState, useEffect, useRef} from "react";
+import {motion, useAnimationControls, AnimatePresence, useInView} from "framer-motion";
 import Image from "next/image";
 
 const hoodieDesigns = [
@@ -18,8 +18,10 @@ export default function SpinnerHoodies() {
   const [isWaitPhase, setIsWaitPhase] = useState(false);
   const [currentMockup, setCurrentMockup] = useState("/hoodies/solidback.png");
 
-  const controls = useAnimationControls();
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { amount: 0.3 });
 
+  const controls = useAnimationControls();
   const ITEM_HEIGHT = 160;
   const GAP = 12;
   const TOTAL_ITEM_SIZE = ITEM_HEIGHT + GAP;
@@ -29,7 +31,13 @@ export default function SpinnerHoodies() {
     let isMounted = true;
 
     const runSpinner = async () => {
-      while (isMounted) {
+  
+      if (!isInView) {
+        controls.stop();
+        return;
+      }
+  
+      while (isMounted && isInView) {
         controls.set({y: 0});
         setWinnerIndex(null);
         setIsWaitPhase(false);
@@ -61,12 +69,14 @@ export default function SpinnerHoodies() {
     return () => {
       isMounted = false;
     };
-  }, [controls, TOTAL_ITEM_SIZE]);
+  }, [controls, TOTAL_ITEM_SIZE, isInView]);
 
   const extendedHoodies = Array(15).fill(hoodieDesigns).flat();
 
   return (
-    <div className="flex flex-row items-center justify-center gap-20 p-10 bg-black min-h-screen w-full">
+    <div
+      ref={sectionRef}
+      className="flex flex-row items-center justify-center gap-20 p-10 bg-black min-h-screen w-full">
       {/* 1. Vertical Spinner Section (Left Side) */}
       <div
         className="relative overflow-hidden rounded-2xl border border-white/10"

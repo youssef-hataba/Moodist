@@ -1,10 +1,12 @@
+import SpinnerHoodies from "./SpinnerHoodies";
 import TextReveal from "./TextReveal";
 
 export default function MakeHoodie() {
 
   return (
     <section className="relative w-full h-screen py-16">
-      <TextReveal />
+      {/* <TextReveal /> */}
+      <SpinnerHoodies />
     </section>
   );
 }
