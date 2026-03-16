@@ -7,7 +7,7 @@ import Image from "next/image";
 const texts = [
   {main: "Elevate Your", highlight: "Style"},
   {main: "Modern", highlight: "Apparel"},
-  {main: "Your Turn to", highlight: "Create"},
+  {main: "Your Turn to", highlight: "Create..."},
 ];
 
 export default function Hero() {
