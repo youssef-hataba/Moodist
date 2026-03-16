@@ -1,6 +1,9 @@
+import FloatingActions from "../components/layout/WhatsAppFAB";
+import Footer from "../components/layout/Footer";
 import Navbar from "../components/layout/Navbar";
 import "./globals.css";
 import type {Metadata} from "next";
+import WhatsAppFAB from "../components/layout/WhatsAppFAB";
 
 export const metadata: Metadata = {
   icons: {
@@ -16,8 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-black overflow-hidde">
+        <WhatsAppFAB />
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
