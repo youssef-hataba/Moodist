@@ -13,7 +13,7 @@ interface ButtonProps extends Omit<HTMLMotionProps<"button">, "children"> {
 export function Button({variant = "primary", className, children, ...props}: ButtonProps) {
   const baseStyles =
     "relative inline-flex items-center justify-center overflow-hidden rounded-full " +
-    "px-6 py-4 font-black uppercase tracking-[0.07em] cursor-pointer " +
+    "px-6 py-3 font-black uppercase tracking-[0.07em] cursor-pointer " +
     "transition-all duration-800 focus:outline-none disabled:opacity-50 disabled:pointer-events-none";
 
   const variants: Record<ButtonVariant, string> = {

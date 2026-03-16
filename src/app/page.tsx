@@ -11,10 +11,9 @@ export default function Home() {
         <MakeHoodie />
         <Products/>
         <StoryFeatures />
-
       </main>
     </div>
   );
 }
 
-// Hero MakeHoodie Categories Featured Products StoryFeatures Reviews FAQs Contact & Newsletter:
+// Hero MakeHoodie Products StoryFeatures Reviews FAQs Contact & Newsletter:
