@@ -25,7 +25,7 @@ export default function Hero() {
   }, [index]);
 
   return (
-    <section ref={containerRef} className="relative w-full flex items-center  py-16">
+    <section ref={containerRef} className="relative w-full flex items-center section-padding">
       <div className="container mx-auto relative z-20 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         {/* Left Side: Content */}
         <div className="lg:col-span-7 pt-20 lg:pt-0">

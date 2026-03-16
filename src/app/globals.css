@@ -39,6 +39,12 @@
 --color-white-900: #bfbfbf;
 }
 
+@layer components {
+  .section-padding {
+    @apply py-8 md:py-14 xl:py-20;
+  }
+}
+
 /* ===== Scrollbar - Chrome, Edge, Safari ===== */
 ::-webkit-scrollbar {
   width: 10px;

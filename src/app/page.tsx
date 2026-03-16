@@ -1,6 +1,7 @@
 import Hero from "../components/hero/Hero";
 import MakeHoodie from "../components/makeHoodie/MakeHoodie";
 import StoryFeatures from "../components/Features";
+import Products from "../components/Products";
 
 export default function Home() {
   return (
@@ -8,8 +9,12 @@ export default function Home() {
       <main>
         <Hero />
         <MakeHoodie />
+        <Products/>
         <StoryFeatures />
+
       </main>
     </div>
   );
 }
+
+// Hero MakeHoodie Categories Featured Products StoryFeatures Reviews FAQs Contact & Newsletter:

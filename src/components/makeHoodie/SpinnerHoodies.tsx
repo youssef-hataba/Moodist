@@ -76,7 +76,7 @@ export default function SpinnerHoodies() {
   return (
     <div
       ref={sectionRef}
-      className="flex flex-row items-center justify-center gap-20 p-10 bg-black min-h-screen w-full">
+      className="section-padding flex flex-row items-center justify-center gap-20 bg-black w-full">
       {/* 1. Vertical Spinner Section (Left Side) */}
       <div
         className="relative overflow-hidden rounded-2xl border border-white/10"
