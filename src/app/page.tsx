@@ -1,6 +1,6 @@
 import Hero from "../components/hero/Hero";
 import MakeHoodie from "../components/makeHoodie/MakeHoodie";
-import StoryFeatures from "../components/Features";
+import StoryFeatures from "../components/features/Features";
 import Products from "../components/products/Products";
 import Reviews from "../components/Reviews";
 import FAQ from "../components/FAQ";
