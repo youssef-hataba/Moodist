@@ -45,7 +45,7 @@ export default function StoryFeatures() {
   return (
     <section
       ref={containerRef}
-      className="relative section-padding bg-black overflow-hidden px-6 lg:px-20">
+      className="max-w-360 mx-auto relative section-padding bg-black overflow-hidden px-6 lg:px-20">
       {/* Background text with parallax motion */}
       <motion.div
         style={{y: yText}}

@@ -24,7 +24,7 @@ export default function Reviews() {
   ]);
 
   return (
-    <section className="bg-black section-padding">
+    <section className="bg-black section-padding max-w-360 mx-auto">
       <div className="container mx-auto px-4 mb-16 text-center">
         <h2 className="text-white text-[10px] tracking-[0.5em] uppercase opacity-40 mb-6">
           Voices of our Community
