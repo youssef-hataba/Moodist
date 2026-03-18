@@ -5,6 +5,7 @@ import Products from "../components/products/Products";
 import Reviews from "../components/Reviews";
 import FAQ from "../components/FAQ";
 import ContactNewsletter from "../components/ContactNewsletter";
+import Categories from "../components/Categories";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <main>
         <Hero />
         <MakeHoodie />
+        <Categories />
         <Products />
         <StoryFeatures />
         <Reviews />
