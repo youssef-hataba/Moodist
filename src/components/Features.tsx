@@ -11,23 +11,23 @@ type Feature = {
 
 const features: Feature[] = [
   {
-    title: "Vivid Precision",
-    desc: "High-definition prints that capture every detail of your vision with sharp, vibrant colors.",
+    title: "Vivid Graphics",
+    desc: "Ultra-sharp 4K printing technology. Colors that don't just stay—they scream.",
     icon: "/icons/printer2.gif",
   },
   {
-    title: "Premium Fabric",
-    desc: "Experience the luxurious embrace of high-quality Egyptian cotton, selected for its softness.",
+    title: "Raw Luxury",
+    desc: "Heavyweight Egyptian cotton. Engineered for the streets, crafted for the soul.",
     icon: "/icons/premium.gif",
   },
   {
-    title: "Tailored Comfort",
-    desc: "A modern, perfected fit designed to provide a sharp silhouette without compromising on cozy feel.",
+    title: "Cyber Fit",
+    desc: "The perfect drop-shoulder silhouette. Designed to move with the urban rhythm.",
     icon: "/icons/hoodi.gif",
   },
   {
-    title: "Rapid Custom",
-    desc: "Your vision, realized. Get your unique custom design ready and shipped within 48 hours.",
+    title: "48H Genesis",
+    desc: "From concept to reality in 48 hours. Speed is our only constant.",
     icon: "/icons/setting2.gif",
   },
 ];
@@ -41,11 +41,11 @@ const FeatureCard = ({f, i}: {f: Feature; i: number}) => {
       transition={{
         duration: 2,
         delay: i * 0.25,
-        ease: [0.16, 1, 0.3, 1], 
+        ease: [0.16, 1, 0.3, 1],
       }}
       viewport={{once: true}}
       whileHover={{y: -12, transition: {duration: 0.4}}}
-      className="group relative p-10 rounded-[2.5rem] bg-white/2 border border-white/15 
+      className="group relative p-8 rounded-[2.5rem] bg-white/2 border border-white/15 
       hover:border-primary-500/40 transition-colors duration-500 overflow-hidden">
       <motion.span
         initial={{x: 20, opacity: 0}}
@@ -57,11 +57,11 @@ const FeatureCard = ({f, i}: {f: Feature; i: number}) => {
       </motion.span>
 
       <div className="relative z-10">
-        <motion.div
-          className="mb-12 inline-block relative">
+        <motion.div className="mb-8 inline-block relative">
           {/* Glow effect behind the icon */}
           <div className="absolute inset-0 bg-primary-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <div className="relative w-16 h-16 flex items-center justify-center rounded-2xl bg-white/3 border border-white/10
+          <div
+            className="relative w-16 h-16 flex items-center justify-center rounded-2xl bg-white/3 border border-white/10
             group-hover:border-primary-500/30 transition-all">
             <Image
               src={f.icon}
@@ -77,15 +77,18 @@ const FeatureCard = ({f, i}: {f: Feature; i: number}) => {
           {f.title}
         </h3>
 
-        <p className="text-gray-400 font-serif italic text-lg leading-relaxed group-hover:text-white 
+        <p
+          className="text-gray-400 font-serif italic text-lg leading-relaxed group-hover:text-white 
         transition-colors duration-500">
           {f.desc}
         </p>
       </div>
 
       {/* Shine effect sweeps across the card on hover */}
-      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform 
-      duration-1000 bg-linear-to-r from-transparent via-white/3 to-transparent pointer-events-none" />
+      <div
+        className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform 
+      duration-1000 bg-linear-to-r from-transparent via-white/3 to-transparent pointer-events-none"
+      />
     </motion.div>
   );
 };
@@ -125,13 +128,13 @@ export default function StoryFeatures() {
 
           <div className="overflow-hidden">
             <motion.h2
-              initial={{y: "100%"}}
+              initial={{y: "120%"}}
               whileInView={{y: 0}}
-              transition={{duration: 0.8}}
-              className="text-6xl md:text-[10rem] font-black text-white leading-[0.75] tracking-[-0.06em] mb-12">
-              NOT JUST <br />
+              transition={{duration: 1}}
+              className="text-6xl md:text-[6rem] font-black text-white leading-[0.75] tracking-[-0.06em] mb-12 uppercase">
+              CODE YOUR <br />
               <span className="font-serif italic font-light text-[0.85em] text-transparent bg-clip-text bg-radial from-white to-white/20">
-                Hoodies.
+                Identity.
               </span>
             </motion.h2>
           </div>
