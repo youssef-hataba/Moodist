@@ -3,6 +3,7 @@ import {useState, useEffect, useRef} from "react";
 import {motion, AnimatePresence} from "framer-motion";
 import {Button} from "../Button";
 import Image from "next/image";
+import {Flame} from "lucide-react";
 
 const texts = [
   {main: "Elevate Your", highlight: "Style"},
@@ -34,7 +35,7 @@ export default function Hero() {
             animate={{opacity: 1, x: 0}}
             transition={{duration: 0.8}}>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 mb-2">
-              <span className="w-2 h-2 rounded-full bg-primary-600 animate-pulse" />
+              <Flame size={12} className="text-red-500" />
               <span className="text-[10px] uppercase tracking-[0.3em] text-gray-400 font-bold">
                 New Collection Out Now
               </span>
