@@ -23,7 +23,7 @@ export default function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-4 z-50 backdrop-blur-md text-white transition-colors duration-300",
+        "sticky top-12 z-50 backdrop-blur-md text-white transition-colors duration-300",
         "w-[80%] mx-auto rounded-full mt-3",
         "border border-red-500/20 shadow-[0_4px_30px_rgba(255,0,0,0.1)]"
       )}>
