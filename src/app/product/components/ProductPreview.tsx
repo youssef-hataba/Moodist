@@ -28,12 +28,13 @@ export default function ProductPreview({
           <motion.div 
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            className="flex items-center gap-2 bg-black/60 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full shadow-2xl"
+            className="flex items-center gap-2 bg-black-300/20 text-white font-black backdrop-blur-md 
+            border border-white/10 px-4 py-2 rounded-full shadow-2xl"
           >
             {tag === "BEST SELLER" && (
               <>
-                <Star size={14} className="text-orange-400" fill="currentColor" />
-                <span className="text-white text-[11px] font-black tracking-[0.2em] uppercase">
+                <Star size={16} className="text-orange-400" fill="currentColor" />
+                <span className="text-[12px] tracking-[0.2em] uppercase">
                   Best Seller
                 </span>
               </>
@@ -41,8 +42,8 @@ export default function ProductPreview({
 
             {tag === "NEW" && (
               <>
-                <Flame size={14} className="text-red-500 " />
-                <span className="text-white text-[11px] font-black tracking-[0.2em] uppercase">
+                <Flame size={16} className="text-red-500 " />
+                <span className="text-[12px] tracking-[0.2em] uppercase">
                   New Drop
                 </span>
               </>
