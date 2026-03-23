@@ -1,5 +1,6 @@
 import {ColorOption, DesignOption, ProductData} from "../types/product";
 import AddToCartButton from "./AddToCartButton";
+import SizeGuide from "./SizeGuide";
 
 interface Props {
   productData: ProductData;
@@ -25,13 +26,13 @@ export default function ConfigPanel({
   handleAddToCart,
 }: Props) {
   return (
-    <section className="lg:col-span-4 space-y-12 lg:pt-10">
+    <section className="lg:col-span-4 space-y-12">
       <header className="space-y-4">
         <h1 className="text-[42px] font-black uppercase italic">{productData.name}</h1>
         <p className="text-2xl text-white/60">{productData.price} EGP</p>
       </header>
 
-      <div className="space-y-12 border-t border-white/10 pt-10">
+      <div className="space-y-8 border-t border-white/10 pt-10">
         {/* Colors */}
         <div className="space-y-6">
           <h3 className="text-[10px] uppercase text-white/30">01. Select Hue</h3>
@@ -59,7 +60,7 @@ export default function ConfigPanel({
               <button
                 key={size}
                 onClick={() => setSelectedSize(size)}
-                className={`py-4 text-[11px] font-black border ${
+                className={`py-4 text-[11px] font-black border cursor-pointer ${
                   selectedSize === size
                     ? "bg-white text-black border-white"
                     : "bg-white/5 border-white/5 text-white/80"
@@ -69,6 +70,7 @@ export default function ConfigPanel({
             ))}
           </div>
         </div>
+        <SizeGuide />
         <AddToCartButton
           selectedSize={selectedSize}
           selectedDesign={selectedDesign}

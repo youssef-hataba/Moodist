@@ -52,7 +52,7 @@ export default function ProductConfigurator() {
   }, [selectedDesign, selectedColor]);
 
   return (
-    <div className="max-w-350 mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+    <div className="max-w-350 mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 section-padding">
       <section className="lg:col-span-8 space-y-8">
         <ProductPreview
           displayImage={displayImage}

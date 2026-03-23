@@ -30,7 +30,7 @@ export default function AddToCartButton({
         disabled={!selectedSize || isAdding}
         onClick={handleAddToCart}
         className={`
-          group relative flex-1 py-6 overflow-hidden transition-all duration-500
+          group relative flex-1 py-6 overflow-hidden transition-all duration-500 cursor-pointer
           ${
             !selectedSize
               ? "bg-white/10 cursor-not-allowed grayscale text-white/30"
@@ -79,7 +79,7 @@ export default function AddToCartButton({
       {/* Favorite Button */}
       <button
         onClick={() => setIsFavorite(!isFavorite)}
-        className="group relative px-6 py-6 border border-white/20 bg-transparent overflow-hidden transition-all duration-500 hover:border-primary-600">
+        className="cursor-pointer group relative px-6 py-6 border border-white/20 bg-transparent overflow-hidden transition-all duration-500 hover:border-primary-600">
         {/* Background Hover Effect for Favorite */}
         <div className="absolute inset-0 bg-primary-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
 
