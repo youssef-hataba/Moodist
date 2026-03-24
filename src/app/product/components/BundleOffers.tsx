@@ -1,10 +1,9 @@
 "use client";
 import {motion, useScroll, useTransform} from "framer-motion";
-import {useRef} from "react";
+import React, {useRef} from "react";
 import Image from "next/image";
 import {ArrowRight, Zap} from "lucide-react";
 import {IoMdCart} from "react-icons/io";
-
 
 interface BundleItem {
   name: string;
@@ -76,31 +75,51 @@ export default function MegaBundle() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 items-end mb-20">
-          {items.map((item) => (
-            <motion.div
-              key={item.name}
-              initial={{opacity: 0, y: 50}}
-              whileInView={{opacity: 1, y: 0}}
-              transition={{delay: item.delay, duration: 0.8}}
-              whileHover={{y: -15}}
-              className="group relative flex flex-col items-center cursor-crosshair gap-4">
-              <div className="relative w-full aspect-4/5 transition-all duration-700">
-                <div className="absolute inset-0 bg-primary-600/5 blur-[80px] rounded-full group-hover:bg-primary-600/15 transition-colors duration-700" />
-                <Image
-                  src={item.img}
-                  alt={item.name}
-                  fill
-                  priority
-                  className="object-contain drop-shadow-[0_40px_60px_rgba(0,0,0,0.9)] z-10 transition-transform duration-700 group-hover:scale-110"
-                />
-              </div>
-              <div className="flex flex-col items-center gap-3">
-                <span className="text-[11px] font-black uppercase tracking-[0.4em] text-white/20 group-hover:text-primary-600 transition-colors">
-                  {item.name}
-                </span>
-                <div className="h-0.5 w-0 group-hover:w-16 bg-primary-600 transition-all duration-500 ease-out" />
-              </div>
-            </motion.div>
+          {items.map((item, index) => (
+            <React.Fragment key={item.name}>
+              <motion.div
+                initial={{opacity: 0, y: 50}}
+                whileInView={{opacity: 1, y: 0}}
+                transition={{delay: item.delay, duration: 0.8}}
+                whileHover={{y: -15}}
+                className="group relative flex flex-col items-center cursor-crosshair gap-4">
+                <div className="relative w-full aspect-4/5 transition-all duration-700">
+                  <div className="absolute inset-0 bg-primary-600/5 blur-[80px] rounded-full group-hover:bg-primary-600/15 transition-colors duration-700" />
+                  <Image
+                    src={item.img}
+                    alt={item.name}
+                    fill
+                    priority
+                    className="object-contain drop-shadow-[0_40px_60px_rgba(0,0,0,0.9)] z-10 transition-transform duration-700 group-hover:scale-110"
+                  />
+                </div>
+                <div className="flex flex-col items-center gap-3">
+                  <span className="text-[11px] font-black uppercase tracking-[0.4em] text-white/20 group-hover:text-primary-600 transition-colors">
+                    {item.name}
+                  </span>
+                  <div className="h-0.5 w-0 group-hover:w-16 bg-primary-600 transition-all duration-500 ease-out" />
+                </div>
+              </motion.div>
+
+              {index < items.length - 1 && (
+                <div
+                  className="hidden md:flex absolute top-1/2 -translate-y-1/2 items-center justify-center z-30"
+                  style={{left: `${(index + 1) * 33.33 - 1.5}%`}}>
+                  <div className="absolute w-20 h-20 bg-primary-600/10 blur-3xl rounded-full" />
+
+                  <div className="relative w-14 h-14 flex items-center justify-center rounded-full border border-white/10 bg-white/3 backdrop-blur-md shadow-2xl">
+                    <div className="absolute inset-0 rounded-full border border-primary-600/20 scale-90 animate-[ping_3s_infinite]" />
+
+                    <div className="relative w-6 h-6 flex items-center justify-center">
+                      <div className="absolute w-full h-[1.5px] bg-linear-to-r from-transparent via-primary-600 to-transparent" />
+                      <div className="absolute h-full w-[1.5px] bg-linear-to-b from-transparent via-primary-600 to-transparent" />
+                    </div>
+
+                    <div className="absolute inset-0 rounded-full bg-linear-to-tr from-transparent via-white/5 to-transparent" />
+                  </div>
+                </div>
+              )}
+            </React.Fragment>
           ))}
         </div>
 
