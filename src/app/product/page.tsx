@@ -1,6 +1,7 @@
 import ProductCarousel from "@/src/components/products/ProductCarousel";
 import BundleOffers from "./components/BundleOffers";
 import ProductConfigurator from "./components/ProductConfigurator";
+import ProductReviews from "./components/ProductReviews";
 
 const products = [
   {
@@ -82,6 +83,7 @@ export default function ProductPage() {
     <main className="min-h-screen text-white">
       <ProductConfigurator />
       <BundleOffers />
+      <ProductReviews />
       <ProductCarousel 
         title="People Also" 
         highlightText="Liked" 
