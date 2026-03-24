@@ -51,7 +51,7 @@ export default function ProductCarousel({
   }, [emblaApi, onSelect]);
 
   return (
-    <section className="section-padding bg-black overflow-hidden relative pb-10">
+    <section className="section-padding bg-black overflow-hidden relative">
       <div className="container mx-auto px-4">
         {/* Header with Navigation */}
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-6">

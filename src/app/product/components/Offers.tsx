@@ -11,7 +11,7 @@ interface BundleItem {
   delay: number;
 }
 
-export default function MegaBundle() {
+export default function Offers() {
   const containerRef = useRef<HTMLDivElement>(null);
   const {scrollYProgress} = useScroll({
     target: containerRef,
@@ -29,7 +29,7 @@ export default function MegaBundle() {
   return (
     <section
       ref={containerRef}
-      className="section-padding bg-[#050505] border-y border-white/10 relative overflow-hidden">
+      className="section-padding bg-[#050505] text-white border-y border-white/10 relative overflow-hidden">
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{

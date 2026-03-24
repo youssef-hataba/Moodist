@@ -1,5 +1,5 @@
 import ProductCarousel from "@/src/components/products/ProductCarousel";
-import BundleOffers from "./components/BundleOffers";
+import Offers from "./components/Offers";
 import ProductConfigurator from "./components/ProductConfigurator";
 import ProductReviews from "./components/ProductReviews";
 
@@ -82,7 +82,7 @@ export default function ProductPage() {
   return (
     <main className="min-h-screen text-white">
       <ProductConfigurator />
-      <BundleOffers />
+      <Offers />
       <ProductReviews />
       <ProductCarousel 
         title="People Also" 

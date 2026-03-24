@@ -6,6 +6,7 @@ import Reviews from "../components/Reviews";
 import FAQ from "../components/FAQ";
 import ContactNewsletter from "../components/ContactNewsletter";
 import Categories from "../components/Categories";
+import Offers from "./product/components/Offers";
 
 const products = [
   {
@@ -95,6 +96,7 @@ export default function Home() {
           products={products}
           viewAllLink="/collections"
         />
+        <Offers />
         <StoryFeatures />
         <Reviews />
         <FAQ />
