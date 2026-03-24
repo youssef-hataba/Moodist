@@ -6,7 +6,8 @@ import {motion} from "framer-motion";
 import Image from "next/image";
 import {ChevronLeft, ChevronRight} from "lucide-react";
 import {Button} from "../Button";
-import ProductCard, { Product } from "./ProductCard";
+import ProductCard, { Product } from "./ProductCard"
+import Link from "next/link";
 
 interface ProductCarouselProps {
   title: string;
@@ -19,7 +20,7 @@ export default function ProductCarousel({
   title, 
   highlightText = "Core", 
   products, 
-  viewAllLink = "/shop" 
+  viewAllLink = "/collections" 
 }: ProductCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({align: "start", loop: false, dragFree: true});
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
@@ -101,16 +102,18 @@ export default function ProductCarousel({
         </div>
 
         <div className="mt-18 text-center">
-          <Button variant="secondary" className="text-white py-3 tracking-widest text-sm">
-            View All Products
-            <Image
-              alt="Arrow"
-              src="/icons/SwipeArrow.gif"
-              width={24}
-              height={24}
-              className="rotate-90 invert grayscale group-hover:grayscale-0 group-hover:opacity-100 opacity-40 transition-all duration-500"
-            />
-          </Button>
+          <Link href={viewAllLink} className="inline-block">
+            <Button variant="secondary" className="text-white py-3 tracking-widest text-sm">
+              View All Products
+              <Image
+                alt="Arrow"
+                src="/icons/SwipeArrow.gif"
+                width={24}
+                height={24}
+                className="rotate-90 invert grayscale group-hover:grayscale-0 group-hover:opacity-100 opacity-40 transition-all duration-500"
+              />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

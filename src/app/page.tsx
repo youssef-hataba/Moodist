@@ -93,7 +93,7 @@ export default function Home() {
           title="Most"
           highlightText="Popular"
           products={products}
-          viewAllLink="/collections/all"
+          viewAllLink="/collections"
         />
         <StoryFeatures />
         <Reviews />
