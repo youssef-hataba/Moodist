@@ -86,7 +86,7 @@ export default function ProductPage() {
         title="People Also" 
         highlightText="Liked" 
         products={products}
-        viewAllLink="/collections/all"
+        viewAllLink="/collections"
       />
     </main>
   );
