@@ -90,13 +90,13 @@ export default function Home() {
         <Hero />
         <MakeHoodie />
         <Categories />
+        <Offers />
         <ProductCarousel
           title="Most"
           highlightText="Popular"
           products={products}
           viewAllLink="/collections"
         />
-        <Offers />
         <StoryFeatures />
         <Reviews />
         <FAQ />

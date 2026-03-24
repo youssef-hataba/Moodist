@@ -61,7 +61,7 @@ export default function SpinnerHoodies() {
         setIsWaitPhase(true);
         setCurrentMockup(hoodieDesigns[randomIndex].mockup);
 
-        await new Promise((resolve) => setTimeout(resolve, 8000));
+        await new Promise((resolve) => setTimeout(resolve, 5000));
       }
     };
 
@@ -71,7 +71,7 @@ export default function SpinnerHoodies() {
     };
   }, [controls, TOTAL_ITEM_SIZE, isInView]);
 
-  const extendedHoodies = Array(15).fill(hoodieDesigns).flat();
+  const extendedHoodies = Array(6).fill(hoodieDesigns).flat();
 
   return (
     <div
