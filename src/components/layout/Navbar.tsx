@@ -11,15 +11,14 @@ import Image from "next/image";
 
 const navItems = [
   {title: "Home", href: "/"},
-  {title: "Shop", href: "/shop"},
+  { title: "Custom Lab", href: "/#make-hoodie" },
   {title: "Collections", href: "/collections"},
-  {title: "About", href: "/about"},
-  {title: "Contact", href: "/contact"},
+  { title: "Our Story", href: "/about" },
+  { title: "Contact", href: "/#contact" },
 ];
 
 export default function Navbar() {
-  const pathname = usePathname(); // هنا نجيب الصفحة الحالية
-
+  const pathname = usePathname();
   return (
     <header
       className={cn(
@@ -35,7 +34,7 @@ export default function Navbar() {
             <Image src="/logo.webp" alt="Logo" width={40} height={40} />
             <span className="text-2xl font-bold tracking-tight">MOODIST.eg</span>
           </Link>
-          <div className="flex justify-between w-[40%]">
+          <div className="flex justify-between w-[45%]">
             {navItems.map((item) => {
               const isActive = pathname === item.href; 
               return (

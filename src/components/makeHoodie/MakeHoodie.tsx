@@ -1,11 +1,9 @@
 import SpinnerHoodies from "./SpinnerHoodies";
-import TextReveal from "./TextReveal";
 
 export default function MakeHoodie() {
 
   return (
-    <section className="relative w-full">
-      {/* <TextReveal /> */}
+    <section id="make-hoodie" className="relative w-full">
       <SpinnerHoodies />
     </section>
   );

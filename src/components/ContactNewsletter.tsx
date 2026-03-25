@@ -39,7 +39,7 @@ export default function ContactNewsletter() {
   };
 
   return (
-    <section className="bg-black section-padding px-4 border-t border-white/5">
+    <section id="contact" className="bg-black section-padding px-4 border-t border-white/5">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
           
