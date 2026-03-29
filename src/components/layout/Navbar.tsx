@@ -124,7 +124,9 @@ export default function Navbar() {
             <Heart className="w-5 h-5" />
           </Button>
           <Button variant="ghost" className="p-2 text-white">
-            <ShoppingCart className="w-5 h-5" />
+            <Link href="/profile">
+              <ShoppingCart className="w-5 h-5" />
+            </Link>
           </Button>
           <Button asChild variant="ghost" className="p-2 text-white">
             <Link href="/login">
