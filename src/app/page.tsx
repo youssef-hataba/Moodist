@@ -86,7 +86,7 @@ const products = [
 export default function Home() {
   return (
     <div>
-      <main>
+      <main id="home">
         <Hero />
         <MakeHoodie />
         <Categories />
