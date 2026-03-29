@@ -51,6 +51,8 @@ export default function ProductConfigurator() {
     return selectedColor.baseImage;
   }, [selectedDesign, selectedColor]);
 
+  const hasAvailableDesigns = productData.availableDesigns && productData.availableDesigns.length > 0;
+
   return (
     <div className="px-4 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 section-padding">
       <section className="lg:col-span-8 space-y-8">
@@ -62,17 +64,19 @@ export default function ProductConfigurator() {
           setCustomScale={setCustomScale}
         />
 
-        <DesignStudio
-          productData={productData}
-          selectedDesign={selectedDesign}
-          setSelectedDesign={setSelectedDesign}
-          customImage={customImage}
-          setCustomImage={setCustomImage}
-          setCustomScale={setCustomScale}
-          inputKey={inputKey}
-          fileInputRef={fileInputRef}
-          handleFileUpload={handleFileUpload}
-        />
+        {hasAvailableDesigns && (
+          <DesignStudio
+            productData={productData}
+            selectedDesign={selectedDesign}
+            setSelectedDesign={setSelectedDesign}
+            customImage={customImage}
+            setCustomImage={setCustomImage}
+            setCustomScale={setCustomScale}
+            inputKey={inputKey}
+            fileInputRef={fileInputRef}
+            handleFileUpload={handleFileUpload}
+          />
+        )}
       </section>
 
       <ConfigPanel

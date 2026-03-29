@@ -89,7 +89,7 @@ export default function ConfigPanel({
                   {size}
                   {isOutOfStock && (
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-[120%] h-[1px] bg-white/40 rotate-45" />
+                      <div className="w-[120%] h-px bg-white/40 rotate-45" />
                     </div>
                   )}
                 </button>

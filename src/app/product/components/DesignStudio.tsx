@@ -27,6 +27,10 @@ export default function DesignStudio({
 }: Props) {
   const [emblaRef] = useEmblaCarousel({align: "start", containScroll: "trimSnaps", dragFree: true});
 
+  if (!productData.availableDesigns || productData.availableDesigns.length === 0) {
+    return null;
+  }
+
   return (
     <div className="space-y-4 bg-black-900 py-4 pl-4 border border-white/5">
       <div className="flex justify-between items-center pr-6">
