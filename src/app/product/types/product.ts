@@ -3,6 +3,7 @@ export interface ColorOption {
   hex: string;
   baseImage: string;
   backImage: string;
+  outOfStockSizes?: string[];
 }
 
 export interface DesignOption {
@@ -17,6 +18,7 @@ export interface ProductData {
   id: number;
   name: string;
   price: number;
+  description?: string;
   colors: ColorOption[];
   sizes: string[];
   availableDesigns: DesignOption[];
