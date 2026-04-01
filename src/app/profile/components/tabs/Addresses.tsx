@@ -8,7 +8,7 @@ export default function AddressesTab() {
         <h2 className="text-[32px] font-black italic uppercase tracking-tighter leading-none">Shipping Addresses</h2>
       </div>
       <div className="grid grid-cols-1 gap-4">
-        <div className="p-6 bg-white/[0.02] border border-white/5 rounded-3xl flex items-start gap-4">
+        <div className="p-6 bg-white/2 border border-white/5 rounded-3xl flex items-start gap-4">
           <MapPin className="w-5 h-5 text-primary-500 mt-1" />
           <div className="space-y-1">
             <p className="font-bold uppercase italic tracking-tight text-sm text-white/90">Main Residence</p>
