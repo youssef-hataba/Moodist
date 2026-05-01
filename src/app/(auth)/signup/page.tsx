@@ -8,6 +8,8 @@ import { Eye, EyeOff, Loader2, UserPlus, ChevronRight } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import { Button } from "@/src/components/Button";
+import {useRouter} from "next/navigation";
+import axios from "axios";
 
 // الـ Schema الموحدة مع Password قوي
 const signupSchema = z.object({
@@ -20,12 +22,13 @@ const signupSchema = z.object({
     .regex(/[A-Z]/, "Include at least one uppercase letter")
     .regex(/[a-z]/, "Include at least one lowercase letter")
     .regex(/[0-9]/, "Include at least one number")
-    .regex(/[^A-Za-z0-9]/, "Include at least one special character"),
+    // .regex(/[^A-Za-z0-9]/, "Include at least one special character"),
 });
 
 type SignupFormData = z.infer<typeof signupSchema>;
 
 export default function SignupPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -45,11 +48,30 @@ export default function SignupPage() {
   };
 
   const onSubmit = async (data: SignupFormData) => {
-    setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log("Registered Data:", data);
+  setIsLoading(true);
+
+  try {
+    const res = await axios.post("http://localhost:3000/api/auth/register", {
+      name: data.fullName,
+      email: data.email,
+      phone: data.phone,
+      password: data.password,
+    });
+
+    console.log("Signup success:", res.data);
+
+    if (res.data.access_token) {
+      localStorage.setItem("access_token", res.data.access_token);
+    }
+
+    router.push("/");
+
+  } catch (err) {
+    console.error("Signup failed", err);
+  } finally {
     setIsLoading(false);
-  };
+  }
+};
 
   return (
     <div className="relative w-full">

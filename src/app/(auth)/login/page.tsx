@@ -8,6 +8,8 @@ import {Eye, EyeOff, Loader2, ShieldCheck, ChevronRight} from "lucide-react";
 import {FcGoogle} from "react-icons/fc";
 import Link from "next/link";
 import {Button} from "@/src/components/Button";
+import axios from "axios";
+import {useRouter} from "next/navigation";
 
 const loginSchema = z.object({
   identifier: z
@@ -31,13 +33,14 @@ const loginSchema = z.object({
     .min(8, "Password must be at least 8 characters")
     .regex(/[A-Z]/, "Include at least one uppercase letter")
     .regex(/[a-z]/, "Include at least one lowercase letter")
-    .regex(/[0-9]/, "Include at least one number")
-    .regex(/[^A-Za-z0-9]/, "Include at least one special character (@, #, etc.)"),
+    .regex(/[0-9]/, "Include at least one number"),
+  // .regex(/[^A-Za-z0-9]/, "Include at least one special character (@, #, etc.)"),
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -58,13 +61,23 @@ export default function LoginPage() {
 
   const onSubmit = async (data: LoginFormData) => {
     setIsLoading(true);
-    await new Promise((resolve) =>
-      setTimeout(() => {
-        console.log("Submit Data:", data);
-        resolve(true);
-      }, 2000),
-    );
-    setIsLoading(false);
+
+    try {
+      const res = await axios.post("http://localhost:3000/api/auth/login", {
+        email: data.identifier,
+        password: data.password,
+      });
+
+      const token = res.data.access_token;
+
+      localStorage.setItem("access_token", token);
+
+      router.push("/");
+    } catch (err) {
+      console.error("Login failed", err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -72,7 +85,7 @@ export default function LoginPage() {
       {/* Dynamic Background Glows - YOUR ORIGINAL STYLE */}
       <div className="absolute -top-20 -left-20 w-64 h-64 bg-primary-500/30 blur-[120px] rounded-full animate-pulse" />
       <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary-500/30 blur-[120px] rounded-full" />
-      
+
       <motion.div
         initial={{opacity: 0, y: 20}}
         animate={{opacity: 1, y: 0}}
@@ -105,11 +118,10 @@ export default function LoginPage() {
               />
             </div>
             {errors.identifier && (
-              <motion.p 
+              <motion.p
                 variants={shakeVariants}
                 animate="error"
-                className="text-red-500 text-[10px] ml-1 uppercase tracking-widest font-medium"
-              >
+                className="text-red-500 text-[10px] ml-1 uppercase tracking-widest font-medium">
                 {errors.identifier.message}
               </motion.p>
             )}
