@@ -1,14 +1,18 @@
 "use client";
 
-import { useState, useMemo, useRef, ChangeEvent } from "react";
-import { ColorOption, DesignOption } from "../types/product";
+import {useState, useMemo, useRef, ChangeEvent} from "react";
+import {ColorOption, DesignOption} from "../../types/product";
 import ConfigPanel from "./ConfigPanel";
 import ProductPreview from "./ProductPreview";
 import DesignStudio from "./DesignStudio";
-import { productData } from "../data/productData";
 
-export default function ProductConfigurator() {
-  const [selectedColor, setSelectedColor] = useState<ColorOption>(productData.colors[0]);
+type Props = {
+  productData: any;
+};
+
+export default function ProductConfigurator({productData}: Props) {
+  const [selectedColor, setSelectedColor] = useState<ColorOption>(productData.colors?.[0]);
+
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedDesign, setSelectedDesign] = useState<DesignOption | null>(null);
   const [customImage, setCustomImage] = useState<string | null>(null);
@@ -21,26 +25,39 @@ export default function ProductConfigurator() {
 
   const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+
     if (file && file.type === "image/png") {
       const reader = new FileReader();
+
       reader.onload = (event) => {
         const result = event.target?.result as string;
+
         setCustomImage(result);
-        setSelectedDesign({ id: "custom", name: "Custom Graphic", thumb: "", isCustom: true });
+        setSelectedDesign({
+          id: "custom",
+          name: "Custom Graphic",
+          thumb: "",
+          isCustom: true,
+        });
+
         setCustomScale(1);
       };
+
       reader.readAsDataURL(file);
     } else if (file) {
       alert("Please upload a valid .png file");
     }
+
     setInputKey((prev) => prev + 1);
   };
 
   const handleAddToCart = () => {
     setIsAdding(true);
+
     setTimeout(() => {
       setIsAdding(false);
       setIsSuccess(true);
+
       setTimeout(() => setIsSuccess(false), 2000);
     }, 1000);
   };
@@ -51,7 +68,7 @@ export default function ProductConfigurator() {
     return selectedColor.baseImage;
   }, [selectedDesign, selectedColor]);
 
-  const hasAvailableDesigns = productData.availableDesigns && productData.availableDesigns.length > 0;
+  const hasAvailableDesigns = productData?.availableDesigns?.length > 0;
 
   return (
     <div className="px-4 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 section-padding">
@@ -62,6 +79,7 @@ export default function ProductConfigurator() {
           customImage={customImage}
           customScale={customScale}
           setCustomScale={setCustomScale}
+          tag={productData?.tag}
         />
 
         {hasAvailableDesigns && (

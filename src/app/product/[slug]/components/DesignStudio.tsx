@@ -1,6 +1,6 @@
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
-import {DesignOption, ProductData} from "../types/product";
+import {DesignOption, ProductData} from "../../types/product";
 
 interface Props {
   productData: ProductData;

@@ -1,6 +1,6 @@
 "use client";
 
-import { ColorOption, DesignOption, ProductData } from "../types/product";
+import {ColorOption, DesignOption, ProductData} from "../../types/product";
 import AddToCartButton from "./AddToCartButton";
 import SizeGuide from "./SizeGuide";
 
@@ -34,10 +34,11 @@ export default function ConfigPanel({
           {productData.name}
         </h1>
         <p className="text-2xl text-white/60">{productData.price} EGP</p>
-        
+
         <div className="pt-2">
           <p className="text-sm text-white/50 leading-relaxed max-w-md">
-            {productData.description || "Premium heavyweight fabric engineered for the perfect oversized fit. Crafted with 100% high-grade Egyptian cotton for maximum comfort and durability."}
+            {productData.description ||
+              "Premium heavyweight fabric engineered for the perfect oversized fit. Crafted with 100% high-grade Egyptian cotton for maximum comfort and durability."}
           </p>
         </div>
       </header>
@@ -59,9 +60,8 @@ export default function ConfigPanel({
                   selectedColor.name === color.name
                     ? "border-white scale-110 shadow-[0_0_15px_rgba(255,255,255,0.1)]"
                     : "border-white/10 hover:border-white/40"
-                }`}
-              >
-                <div className="w-8 h-8 rounded-full" style={{ backgroundColor: color.hex }} />
+                }`}>
+                <div className="w-8 h-8 rounded-full" style={{backgroundColor: color.hex}} />
               </button>
             ))}
           </div>
@@ -72,20 +72,19 @@ export default function ConfigPanel({
           <div className="grid grid-cols-5 gap-2">
             {productData.sizes.map((size) => {
               const isOutOfStock = selectedColor.outOfStockSizes?.includes(size);
-              
+
               return (
                 <button
                   key={size}
                   disabled={isOutOfStock}
                   onClick={() => setSelectedSize(size)}
                   className={`relative py-4 text-[11px] font-black border transition-all duration-200 overflow-hidden ${
-                    isOutOfStock 
-                      ? "opacity-20 cursor-not-allowed border-white/5" 
+                    isOutOfStock
+                      ? "opacity-20 cursor-not-allowed border-white/5"
                       : selectedSize === size
                         ? "bg-white text-black border-white scale-[1.02]"
                         : "bg-white/5 border-white/5 text-white/80 hover:border-white/40"
-                  }`}
-                >
+                  }`}>
                   {size}
                   {isOutOfStock && (
                     <div className="absolute inset-0 flex items-center justify-center">

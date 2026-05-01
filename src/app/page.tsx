@@ -6,7 +6,7 @@ import Reviews from "../components/Reviews";
 import FAQ from "../components/FAQ";
 import ContactNewsletter from "../components/ContactNewsletter";
 import Categories from "../components/Categories";
-import Offers from "./product/components/Offers";
+import Offers from "./product/[slug]/components/Offers";
 
 const products = [
   {

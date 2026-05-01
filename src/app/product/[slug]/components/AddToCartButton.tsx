@@ -3,7 +3,7 @@
 import {Check, Heart} from "lucide-react"; // استيراد Heart
 import {IoMdCart} from "react-icons/io";
 import {motion, AnimatePresence} from "framer-motion";
-import {DesignOption} from "../types/product";
+import {DesignOption} from "../../types/product";
 import {useState} from "react";
 
 interface Props {
