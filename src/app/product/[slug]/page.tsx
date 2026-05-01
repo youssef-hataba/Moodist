@@ -35,6 +35,7 @@ export default function ProductPage() {
 
   // تحويل بسيط للـ UI الحالي بتاعك
   const mappedProductData = {
+    id:product.id,
     name: product.title,
     price: product.basePrice,
     description: product.description,

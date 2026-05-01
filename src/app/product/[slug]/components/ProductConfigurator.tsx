@@ -1,28 +1,35 @@
 "use client";
 
-import {useState, useMemo, useRef, ChangeEvent} from "react";
-import {ColorOption, DesignOption} from "../../types/product";
+import { useState, useMemo, useRef, ChangeEvent } from "react";
+import axios from "axios";
 import ConfigPanel from "./ConfigPanel";
 import ProductPreview from "./ProductPreview";
 import DesignStudio from "./DesignStudio";
+import { ColorOption, DesignOption } from "../types/product";
 
 type Props = {
   productData: any;
 };
 
-export default function ProductConfigurator({productData}: Props) {
-  const [selectedColor, setSelectedColor] = useState<ColorOption>(productData.colors?.[0]);
+export default function ProductConfigurator({ productData }: Props) {
+  const [selectedColor, setSelectedColor] = useState<ColorOption | null>(
+    productData.colors?.[0] || null
+  );
 
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedDesign, setSelectedDesign] = useState<DesignOption | null>(null);
   const [customImage, setCustomImage] = useState<string | null>(null);
   const [customScale, setCustomScale] = useState<number>(1);
   const [inputKey, setInputKey] = useState<number>(0);
+
   const [isAdding, setIsAdding] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // =========================
+  // FILE UPLOAD
+  // =========================
   const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
@@ -51,27 +58,62 @@ export default function ProductConfigurator({productData}: Props) {
     setInputKey((prev) => prev + 1);
   };
 
-  const handleAddToCart = () => {
-    setIsAdding(true);
+  // =========================
+  // ADD TO CART (ONLY PLACE)
+  // =========================
+  const handleAddToCart = async () => {
+    if (!selectedSize) return;
 
-    setTimeout(() => {
-      setIsAdding(false);
+    try {
+      setIsAdding(true);
+      setIsSuccess(false);
+
+      console.log("productdata *************** ",productData)
+
+      await axios.post(
+        "http://localhost:3000/api/cart/add",
+        {
+          productId: productData.id,
+          variantId: selectedDesign?.id || null,
+          quantity: 1,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
       setIsSuccess(true);
 
-      setTimeout(() => setIsSuccess(false), 2000);
-    }, 1000);
+      setTimeout(() => setIsSuccess(false), 1200);
+    } catch (err) {
+      console.error("Add to cart failed", err);
+    } finally {
+      setIsAdding(false);
+    }
   };
 
+  // =========================
+  // DISPLAY IMAGE LOGIC
+  // =========================
   const displayImage = useMemo(() => {
+    if (!selectedColor) return "";
+
     if (selectedDesign?.isCustom) return selectedColor.backImage;
     if (selectedDesign?.fullRender) return selectedDesign.fullRender;
+
     return selectedColor.baseImage;
   }, [selectedDesign, selectedColor]);
 
   const hasAvailableDesigns = productData?.availableDesigns?.length > 0;
 
+  if (!selectedColor) return null;
+
   return (
     <div className="px-4 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 section-padding">
+      
+      {/* LEFT */}
       <section className="lg:col-span-8 space-y-8">
         <ProductPreview
           displayImage={displayImage}
@@ -97,6 +139,7 @@ export default function ProductConfigurator({productData}: Props) {
         )}
       </section>
 
+      {/* RIGHT */}
       <ConfigPanel
         productData={productData}
         selectedColor={selectedColor}
