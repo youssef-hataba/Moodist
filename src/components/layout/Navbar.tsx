@@ -9,7 +9,9 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { MenuIcon, Heart, ShoppingCart } from "lucide-react";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
+import { useAuth } from "@/src/hooks/useAuth";
 import Image from "next/image";
+import CartDrawer from "./CartDrawer";
 
 const navItems = [
   { title: "Home", href: "/", id: "home" },
@@ -21,7 +23,9 @@ const navItems = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { isLoggedIn, loading: authLoading } = useAuth();
   const [activeSection, setActiveSection] = useState("home");
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   useEffect(() => {
     if (pathname !== "/") {
@@ -110,10 +114,13 @@ export default function Navbar() {
             <div className="cursor-pointer group">
               <FaHeart className="w-5 h-5 group-hover:scale-110 group-hover:text-primary-500 transition-all duration-300" />
             </div>
-            <div className="cursor-pointer group">
+            <div 
+              className="cursor-pointer group"
+              onClick={() => setIsCartOpen(true)}
+            >
               <FaShoppingCart className="w-5 h-5 group-hover:scale-110 group-hover:text-primary-500 transition-all duration-300" />
             </div>
-            <Link href="/login" className="cursor-pointer group">
+            <Link href={isLoggedIn ? "/profile" : "/login"} className="cursor-pointer group">
               <FaUser className="w-5 h-5 group-hover:scale-110 group-hover:text-primary-500 transition-all duration-300" />
             </Link>
           </div>
@@ -129,7 +136,7 @@ export default function Navbar() {
             </Link>
           </Button>
           <Button asChild variant="ghost" className="p-2 text-white">
-            <Link href="/login">
+            <Link href={isLoggedIn ? "/profile" : "/login"}>
               <FaUser className="w-5 h-5" />
             </Link>
           </Button>
@@ -170,6 +177,7 @@ export default function Navbar() {
           </Sheet>
         </div>
       </div>
+      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
   );
 }

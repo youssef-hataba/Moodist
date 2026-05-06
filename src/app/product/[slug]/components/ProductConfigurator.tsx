@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useRef, ChangeEvent } from "react";
 import axios from "axios";
+import api from "@/src/lib/api";
 import ConfigPanel from "./ConfigPanel";
 import ProductPreview from "./ProductPreview";
 import DesignStudio from "./DesignStudio";
@@ -62,31 +63,32 @@ export default function ProductConfigurator({ productData }: Props) {
   // ADD TO CART (ONLY PLACE)
   // =========================
   const handleAddToCart = async () => {
-    if (!selectedSize) return;
+    if (!selectedSize || !selectedColor) return;
 
     try {
       setIsAdding(true);
       setIsSuccess(false);
 
-      console.log("productdata *************** ",productData)
-
-      await axios.post(
-        "http://localhost:3000/api/cart/add",
-        {
-          productId: productData.id,
-          variantId: selectedDesign?.id || null,
-          quantity: 1,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
+      // Find the correct variant ID
+      const variant = productData.variants.find(
+        (v: any) => v.size === selectedSize && v.color === selectedColor.name
       );
 
-      setIsSuccess(true);
+      if (!variant) {
+        console.error("Variant not found");
+        return;
+      }
 
-      setTimeout(() => setIsSuccess(false), 1200);
+      await api.post("/cart/add", {
+        productId: productData.id,
+        variantId: variant.id,
+        quantity: 1,
+        customDesignUrl: customImage, // Sending the base64/url of the custom design
+        customText: "", // Add field for custom text if needed
+      });
+
+      setIsSuccess(true);
+      setTimeout(() => setIsSuccess(false), 2000);
     } catch (err) {
       console.error("Add to cart failed", err);
     } finally {

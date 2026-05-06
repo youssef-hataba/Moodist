@@ -35,10 +35,11 @@ export default function ProductPage() {
 
   // تحويل بسيط للـ UI الحالي بتاعك
   const mappedProductData = {
-    id:product.id,
+    id: product.id,
     name: product.title,
     price: product.basePrice,
     description: product.description,
+    variants: product.variants, // Pass raw variants
     colors: product.variants
       .map((v: any) => v.color)
       .filter((v: string, i: number, arr: string[]) => arr.indexOf(v) === i)

@@ -96,13 +96,13 @@ export default function Hero() {
           {/* <div className="absolute -inset-4 border border-white/8 rounded-[3rem] z-0" /> border border-white/12 */}
           {/* <div className="absolute -inset-8 border border-white/5 rounded-[4rem] z-0" /> */}
 
-          <div className="relative h-full rounded-[2.5rem]  shadow-2xl shadow-primary-900/20 overflow-hidden scale-130">
+          <div className="relative h-full rounded-[2.5rem]  shadow-2xl shadow-primary-900/20 overflow-hidde scale-120">
             <video
               autoPlay
               muted
               loop
               playsInline
-              className="absolute inset-0 w-full h-full object-cover">
+              className="absolute inset-0 w-full h-full object-contain">
               <source src="/hero.mp4" type="video/mp4" />
             </video>
 

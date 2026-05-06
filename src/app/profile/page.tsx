@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { Package, Settings, MapPin, Heart, LogOut, Box, ChevronRight, User } from "lucide-react";
+import { Package, Settings, MapPin, Heart, LogOut, Box, ChevronRight, User, Loader2 } from "lucide-react";
+import { useAuth } from "@/src/hooks/useAuth";
 import OrdersTab from "./components/tabs/Orders";
 import DesignsTab from "./components/tabs/Designs";
 import AddressesTab from "./components/tabs/Addresses";
@@ -18,7 +19,21 @@ const menuItems = [
 ];
 
 export default function ProfilePage() {
+  const { user, isLoggedIn, loading, logout } = useAuth();
   const [activeTab, setActiveTab] = useState("orders");
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <Loader2 className="text-white animate-spin" size={48} />
+      </div>
+    );
+  }
+
+  if (!isLoggedIn) {
+    if (typeof window !== "undefined") window.location.href = "/login";
+    return null;
+  }
 
   const renderContent = () => {
     switch (activeTab) {
@@ -26,7 +41,7 @@ export default function ProfilePage() {
       case "designs": return <DesignsTab />;
       case "addresses": return <AddressesTab />;
       case "wishlist": return <WishlistTab />; 
-    case "settings": return <SettingsTab />;
+      case "settings": return <SettingsTab />;
       default: return (
         <div className="flex flex-col items-center justify-center h-full text-white/10 italic font-black text-4xl uppercase">
           Coming Soon
@@ -46,8 +61,12 @@ export default function ProfilePage() {
               </div>
             </div>
             <div>
-              <h1 className="text-3xl font-black italic uppercase tracking-tighter leading-none">Youssef J.</h1>
-              <p className="text-white/40 text-xs mt-2 font-medium tracking-[0.2em] uppercase">Member since 2024</p>
+              <h1 className="text-3xl font-black italic uppercase tracking-tighter leading-none">
+                {user?.name || "Member"}
+              </h1>
+              <p className="text-white/40 text-xs mt-2 font-medium tracking-[0.2em] uppercase">
+                {user?.email}
+              </p>
             </div>
           </header>
 
@@ -73,7 +92,10 @@ export default function ProfilePage() {
                 </button>
               );
             })}
-            <button className="flex items-center gap-4 px-6 py-4 text-red-500/60 hover:text-red-500 transition-colors mt-8 group">
+            <button 
+              onClick={logout}
+              className="flex items-center gap-4 px-6 py-4 text-red-500/60 hover:text-red-500 transition-colors mt-8 group text-left w-full"
+            >
               <LogOut className="w-5 h-5" />
               <span className="text-[11px] font-black uppercase tracking-widest">Logout Account</span>
             </button>
@@ -86,4 +108,4 @@ export default function ProfilePage() {
       </div>
     </div>
   );
-}
+}
